@@ -13,6 +13,8 @@ Version: 1.0.0*/
     <script src="<?php echo PATH_SITE_TEMPLATE . '/js/bundle.js'?>"></script>
 </head>
 <body  class="<?php MG::addBodyClass('l-'); ?>" <?php backgroundSite(); ?>>
+
+<?php layout('svg'); ?>
 <?php layout('header'); ?>
 
 <?php
@@ -38,22 +40,9 @@ if ((MG::get('controller') == "controllers_catalog") || (MG::get('controller') =
 <?php endif; ?>
 
 <main>
-    <?php
-    /**
-     *
-     * Функция URL::isSection проверяет является ли полученное значение - именем текущего раздела.
-     * В данном случае URL::isSection('null') вернёт true на главной странице.
-     * Подробнее о том, как выводить контент на определённой странице - http://wiki.moguta.ru/faq/rabota-s-produktom/kak-vyvodit-kontent-tolko-na-zadannoy-stranitse
-     */
-    if (URL::isSection(null)): ?>
-        <?php
-        /**
-         * С помощью функции class_exists проверяем включен ли плагин, и если да, то выводим его шорткод.
-         * Класс плагина можно посмотреть в файле index.php, находящемся в папке плагина.
-         * Шорткод можно посмотреть в описании нужного плагина в панели управления /mg-admin
-         */
-        if (class_exists('SliderAction')): ?>
-            [slider-action]
+    <?php if (URL::isSection(null)): ?>
+        <?php if (class_exists('Slider')): ?>
+            [mg-slider id='1']
         <?php endif; ?>
     <?php endif; ?>
 

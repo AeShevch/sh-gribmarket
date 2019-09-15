@@ -7,7 +7,7 @@
  *  <?php viewData($data); ?>
  */
 ?>
-<ul class="fast-result-list">
+<ul class="fast-result-list c-search__dropdown">
 	<?php  
 	foreach ($data['items'] as $item) {
 		$title = preg_replace('/'.preg_quote($data['keyword'], "/").'/i', "<b style=\"background:rgb(172, 207, 165)\">\$0</b>", $item['title']);

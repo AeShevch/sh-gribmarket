@@ -1,0 +1,361 @@
+// Переменные
+$borderColor: #c4c4c4;
+$fontSizeM: 16px;
+$fontSizeL: 20px;
+$fontSizeXL: 30px;
+$textColor: #000;
+$container: 1164px;
+$secondColor: #666;
+$accentColor: #6FB83C;
+$titleColor: #6F422A;
+
+@mixin btnReset {
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
+    background: 0 0;
+    -webkit-appearance: none;
+}
+
+@mixin mainContainer {
+    max-width: $container;
+    margin: 0 auto 4rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: $fontSizeM;
+    font-family: 'RotondaC', sans-serif;
+    color: $textColor;
+    line-height: 1.4;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+
+.mg-slide__btn {
+    padding: 0.5em 1em !important;
+    font-weight: 700;
+}
+
+.mg-slide__outer {
+    padding-left: 2em !important;
+}
+
+.mg-slider-wrap {
+    margin-bottom: 4rem !important;
+}
+
+// Шапка сайта
+.header {
+    @include mainContainer;
+    margin-bottom: 0;
+
+    &__top {
+        border-bottom: 1px solid $borderColor;
+        height: 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__center {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+    }
+}
+
+// Верхнее меню
+.top-menu {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+
+    &__item {
+        margin-right: 2em;
+        list-style: none;
+        color: $textColor;
+
+        &:hover {
+            color: $accentColor;
+
+            .top-menu__link {
+                border-color: $accentColor;
+            }
+        }
+    }
+
+    &__link {
+        text-decoration: none;
+        color: inherit;
+        font-size: $fontSizeL;
+        border-bottom: 1px solid $textColor;
+        transition: .3s;
+    }
+}
+
+// Обратный звонок
+.backring {
+    @include btnReset;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: 2em;
+
+    &:hover {
+        .backring__title {
+            text-decoration: underline;
+        }
+    }
+
+    &__icon {
+        width: 28px;
+        height: 28px;
+        margin-right: 7px;
+    }
+
+    &__inner {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    &__title {
+        color: $secondColor;
+    }
+}
+
+.wrapper-back-ring {
+    display: none;
+}
+
+// Поиск
+.search {
+    flex-grow: 1;
+    justify-content: center;
+
+    &__form {
+        display: flex;
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    &__input {
+        height: 40px;
+        width: 100%;
+        max-width: 455px;
+        border: 1px solid $accentColor;
+        margin-right: 2em;
+        border-radius: 2px;
+        padding-left: 2em;
+        background-image: url(../images/search.svg);
+        background-repeat: no-repeat;
+        background-position: 8px center;
+    }
+
+    &__btn {
+        @include btnReset;
+        background: $accentColor;
+        border-radius: 2px;
+        height: 40px;
+        width: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+    }
+}
+
+// Главное меню
+.menu {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    border: 1px solid $borderColor;
+    border-width: 1px 0 1px 0;
+    padding-left: 0;
+
+    &__item {
+        list-style: none;
+        flex-grow: 1;
+        height: 60px;
+        transition: .3s;
+        margin-right: 1px;
+
+        &_active,
+        &:hover {
+            background: $accentColor;
+            color: #fff;
+        }
+    }
+
+    &__link {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__icon {
+        width: 28px;
+        height: 28px;
+        margin-right: 10px;
+    }
+}
+
+// Блок с категорями
+.categories {
+    @include mainContainer;
+
+    &__inner {
+        margin: 0 -20px -20px 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__item {
+        flex: 1 1 300px;
+        margin: 0 20px 20px 0;
+        border-radius: 2px;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    &__left,
+    &__right {
+        display: flex;
+        flex-direction: column;
+        margin: 0 20px 0 0;
+        flex-shrink: 1;
+
+        .categories__item {
+            margin-right: 0;
+        }
+    }
+
+    &__left {
+        flex-grow: 3;
+        flex-basis: 63%;
+    }
+
+    &__right {
+        flex-grow: 1;
+        flex-basis: 33%;
+    }
+}
+
+.product-category {
+
+    &:hover {
+        .product-category__inner {
+            background-color: $accentColor;
+        }
+    }
+
+    &__inner {
+        background: rgba(0, 0, 0, 0.5);
+        padding: .5em 1em;
+        margin-top: 2em;
+        transition: .3s;
+    }
+
+    &__title {
+        color: #fff;
+        padding: 0;
+        margin: 0;
+        font-size: 2em;
+        line-height: 1.2;
+    }
+
+    &__subtitle {
+        font-size: $fontSizeL;
+        color: #fff;
+    }
+}
+
+// Карусель товаров
+.products-carousel {
+    @include mainContainer;
+    overflow: hidden;
+
+    &__title {
+        text-align: center;
+    }
+
+    &__link {
+        color: $titleColor;
+        font-size: $fontSizeXL;
+    }
+
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.product-card {
+    padding: 20px;
+    border: 1px solid $borderColor;
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__image {
+        position: relative;
+
+        img {
+            height: 220px;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__title {
+        line-height: 1.2;
+        font-size: $fontSizeL;
+    }
+
+    &__sticker {
+        font-size: $fontSizeL;
+        height: 30px;
+        padding: 0 10px;
+        color: #fff;
+        font-weight: 700;
+        position: absolute;
+        top: 10px;
+        right: 0;
+        background: $accentColor;
+        border-radius: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        line-height: 1;
+
+        & + & {
+            top: 50px;
+        }
+    }
+}
+

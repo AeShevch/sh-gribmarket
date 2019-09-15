@@ -17,19 +17,21 @@
  */
 mgAddMeta('<script src="'.SCRIPT.'standard/js/layout.search.js"></script>'); ?>
 
-<div class="search-block">
-     <form method="get" class="search-form" action="<?php echo SITE?>/catalog">
-         <input type="text" autocomplete="off" name="search" class="search-field" value="Искать товар" onfocus="if (this.value == 'Искать товар') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Искать товар';}">
-         <input type="submit" class="search-button" value="Найти">
+<div class="search">
+     <form method="get"
+           class="search__form"
+           action="<?php echo SITE?>/catalog">
+         <input type="text"
+                autocomplete="off"
+                name="search"
+                class="search__input"
+                placeholder="Что ищем?">
+         <input type="submit"
+                class="search__btn"
+                value="Найти">
+
+         <div class="fastResult"></div>
      </form>
 
-    <?php
-    /**
-     * Быстрые результаты поиска подставляются js-скриптом mg-core/script/standard/js/layout.search.js
-     * При желании его можно отключить, убрав его подключение выше
-     */
-    ?>
-     <div class="fastResult">
 
-     </div>
  </div>
