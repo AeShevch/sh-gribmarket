@@ -10,8 +10,8 @@
 <div class="product-card swiper-slide">
     <div class="product-card__image" role="img">
         <?php
-            echo $data['item']['recommend'] ? '<span class="product-card__sticker product-card__sticker_recommend">Хит!</span>' : '';
-            echo $data['item']['new'] ? '<span class="product-card__sticker product-card__sticker_new">Новинка!</span>' : '';
+            echo $data['item']['recommend'] ? '<span class="product-card__sticker product-card__sticker_recommend">Хит продаж</span>' : '';
+            echo $data['item']['new'] ? '<span class="product-card__sticker product-card__sticker_new">Новинка</span>' : '';
         ?>
         <a href="<?php echo SITE ?>/<?php echo isset($data['item']["category_url"]) ? $data['item']["category_url"] : 'catalog' ?><?php echo htmlspecialchars($data['item']["product_url"]) ?>">
             <?php echo mgImageProduct($data['item'], false, 'MIN', false); ?>
@@ -56,16 +56,20 @@
 
         <?php
             if (MG::getSetting('printQuantityInMini') == 'true'):?>
-                <div class="cart_form product-card__amount">
-                    <div class="amount_change">
-                        <a href="#" class="down">
-                            <
-                        </a>
-                        <input type="text" class="amount_input" name="amount_input"
-                               data-max-count="<?php echo $data['maxCount'] ?>" value="1"/>
-                        <a href="#" class="up">
-                            >
-                        </a>
+                <div class="cart_form product-card__amount amount">
+                    <div class="amount_change amount__inner">
+                        <button class="down amount__btn">
+                            -
+                        </button>
+                        <input type="text"
+                               aria-label="Количество товара"
+                               class="amount_input amount__input"
+                               name="amount_input"
+                               data-max-count="<?php echo $data['maxCount'] ?>"
+                               value="1"/>
+                        <button class="up amount__btn">
+                            +
+                        </button>
                     </div>
                 </div>
             <?php endif; ?>
