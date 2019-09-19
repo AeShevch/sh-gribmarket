@@ -60,8 +60,8 @@ gulp.task('js', js);
 
 function watch() {
     browserSync.init({
-        // proxy: "localhost/GribMarket/",
-        proxy: "localhost/gipermarket/",
+        proxy: "localhost/GribMarket/",
+        // proxy: "localhost/gipermarket/",
         baseDir: "./",
         open: true,
         notify: false

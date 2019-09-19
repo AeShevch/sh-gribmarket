@@ -145,9 +145,6 @@ $pages = Menu::getArrayMenu();
 
             $activeClass = '';
 
-//            echo '$pageUrl=' . $pageUrl . ';';
-//            echo '$linkUrl=' . $linkUrl . ';';
-
             if ($linkUrl === $pageUrl) {
                 $activeClass = 'menu__item_active';
             }

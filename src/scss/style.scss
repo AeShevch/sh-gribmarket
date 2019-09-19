@@ -3,11 +3,14 @@ $borderColor: #c4c4c4;
 $fontSizeM: 16px;
 $fontSizeL: 20px;
 $fontSizeXL: 30px;
+$fontSizeXXL: 60px;
 $textColor: #000;
 $container: 1164px;
 $secondColor: #666;
 $accentColor: #6FB83C;
+$accentSecond: #F44336;
 $titleColor: #6F422A;
+$textGray: #C4C4C4;
 
 @mixin btnReset {
     border-radius: 0;
@@ -21,6 +24,11 @@ $titleColor: #6F422A;
 @mixin mainContainer {
     max-width: $container;
     margin: 0 auto 4rem;
+}
+
+@mixin title {
+    color: $titleColor;
+    font-size: $fontSizeXL;
 }
 
 * {
@@ -40,7 +48,6 @@ img {
     height: auto;
     object-fit: contain;
 }
-
 
 .mg-slide__btn {
     padding: 0.5em 1em !important;
@@ -199,11 +206,14 @@ img {
         transition: .3s;
         margin-right: 1px;
 
+        &_active {
+            font-weight: 700;
+        }
+
         &_active,
         &:hover {
             background: $accentColor;
             color: #fff;
-            font-weight: 700;
         }
     }
 
@@ -293,7 +303,6 @@ img {
         color: #fff;
     }
 }
-
 // Карусель товаров
 .products-carousel {
     @include mainContainer;
@@ -304,8 +313,7 @@ img {
     }
 
     &__link {
-        color: $titleColor;
-        font-size: $fontSizeXL;
+        @include title;
     }
 
     .swiper-container {
@@ -472,5 +480,279 @@ img {
             color: #fff;
         }
 
+    }
+}
+
+.banner {
+    //background: linear-gradient(101.31deg, rgba(111, 66, 42, 0.8) 0.59%, rgba(111, 66, 42, 0) 60.18%);
+    background-image: url("../images/banner__bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+
+    &__inner {
+        padding: 45px 0;
+        @include mainContainer;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__title {
+        font-size: $fontSizeXXL;
+        line-height: 1;
+        margin-top: 0;
+        margin-bottom: .2em;
+    }
+
+    &__right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    &__subtitle,
+    &__sale {
+        font-size: $fontSizeXL;
+        line-height: 1.2;
+        font-weight: 700;
+    }
+
+    &__sale {
+        margin-top: 10px;
+        mark {
+            -webkit-appearance: none;
+            background: none;
+            color: $accentSecond;
+        }
+    }
+
+    &__link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 2px;
+        background-color: $accentColor;
+        height: 60px;
+        font-size: $fontSizeXL;
+        font-weight: 700;
+        padding: 0 1em;
+    }
+}
+
+.represent {
+    @include mainContainer;
+    &__title {
+        @include title;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 1em;
+    }
+
+    &__subtitle {
+        text-align: center;
+        font-size: 25px;
+        color: $titleColor;
+    }
+
+    &__inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-right: -1%;
+    }
+
+    &__item {
+        flex: 0 1 450px;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    &__alert {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        font-weight: 700;
+        margin-top: 1rem;
+
+        svg {
+            width: 28px;
+            height: 26px;
+            margin-right: 5px;
+        }
+    }
+}
+
+.represent-item {
+    border: 1px solid $borderColor;
+    padding: 2rem;
+    border-radius: 2px;
+    display: flex;
+    justify-content: space-between;
+
+    &__left,
+    &__right {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 50%  ;
+    }
+
+    &__left {
+        margin-right: 1rem;
+    }
+
+    &__city {
+        font-size: 25px;
+        font-weight: 700;
+    }
+
+    &__tel {
+        font-size: $fontSizeM;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+
+        & svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+    }
+
+    &__contacts {
+        font-size: 20px;
+        line-height: 1.2;
+        display: block;
+
+        &_title {
+            color: $textGray;
+            font-weight: 700;
+        }
+    }
+}
+
+.whole-sales {
+    @include mainContainer;
+
+    &__title {
+        @include title;
+        text-align: center;
+    }
+
+    &__image {
+        margin: 0 auto 1rem;
+        display: block;
+    }
+
+    &__text {
+        font-size: 20px;
+
+        &_underline {
+            text-decoration: underline;
+        }
+    }
+}
+
+.table {
+    border-radius: 2px;
+    border-collapse: collapse;
+    border: 1px solid $borderColor;
+    margin-bottom: 1rem;
+
+    &__thead {
+        background: $accentColor;
+        color: #fff;
+    }
+    &__th,
+    &__td {
+        text-align: center;
+        line-height: 1.2;
+        font-weight: 400;
+    }
+    &__th {
+        padding: 10px 5px;
+        font-size: 20px;
+    }
+
+    &__td {
+        border: 1px solid $borderColor;
+        font-size: 18px;
+        padding: 15px 10px;
+    }
+}
+
+.footer {
+    border: 1px solid #85C075;
+    border-width: 1px 0;
+    font-size: 18px;
+
+    &__inner {
+        @include mainContainer;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 80px 0;
+    }
+
+    &__menu,
+    &__info {
+        flex: 1 1 200px;
+    }
+
+    &__form {
+        flex: 1 1 600px;
+    }
+}
+
+.footer-menu {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    &__item {
+        margin-bottom: 9px;
+
+        &_active {
+            text-decoration: underline;
+        }
+
+        &:hover {
+            font-weight: 700;
+        }
+    }
+}
+
+.footer-info {
+    margin-bottom: 44px;
+
+    &__title {
+        font-size: 20px;
+        font-weight: 400;
+        margin: 0 0 5px;
+    }
+
+    &__inner {
+        display: flex;
+        align-items: center;
+    }
+
+    &__icon {
+        width: 28px;
+        height: 28px;
+        margin-right: 5px;
+    }
+}
+
+.work-time {
+    display: flex;
+    justify-content: space-between;
+
+    &__wrap {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__days {
+        color: $secondColor;
     }
 }
