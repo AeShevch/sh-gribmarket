@@ -15,34 +15,37 @@ Version: 1.0.0*/
 <body  class="<?php MG::addBodyClass('l-'); ?>" <?php backgroundSite(); ?>>
 
 <?php layout('svg'); ?>
+
 <?php layout('header'); ?>
 
-<?php if ((MG::get('controller') == "controllers_catalog") || (MG::get('controller') == "controllers_product")): ?>
-    <aside>
-        <?php
-        mgAddMeta('<link type="text/css" href="' . SCRIPT . 'standard/css/jquery.ui.slider.css" rel="stylesheet"/>');
-        mgAddMeta('<script src="' . SCRIPT . 'standard/js/filter.js"></script>');
-        echo MG::get('catalogfilter');
-        ?>
-
-        <?php layout('leftmenu'); ?>
-    </aside>
-
+<?php if (URL::isSection(null)): ?>
+    <?php if (class_exists('Slider')): ?>
+        [mg-slider id='1']
+    <?php endif; ?>
 <?php endif; ?>
 
-<main>
-    <?php if (URL::isSection(null)): ?>
-        <?php if (class_exists('Slider')): ?>
-            [mg-slider id='1']
+<div class="main__wrap">
+    <?php if ((MG::get('controller') == "controllers_catalog") || (MG::get('controller') == "controllers_product")): ?>
+        <aside>
+            <?php layout('leftmenu'); ?>
+            <?php
+            mgAddMeta('<link type="text/css" href="' . SCRIPT . 'standard/css/jquery.ui.slider.css" rel="stylesheet"/>');
+            mgAddMeta('<script src="' . SCRIPT . 'standard/js/filter.js"></script>');
+            echo MG::get('catalogfilter');
+            ?>
+        </aside>
+
+    <?php endif; ?>
+
+    <main class="main">
+
+        <?php if ((class_exists('BreadCrumbs')) && ((MG::get('controller') == "controllers_catalog") || (MG::get('controller') == "controllers_product"))): ?>
+            [brcr]
         <?php endif; ?>
-    <?php endif; ?>
 
-    <?php if ((class_exists('BreadCrumbs')) && ((MG::get('controller') == "controllers_catalog") || (MG::get('controller') == "controllers_product"))): ?>
-        [brcr]
-    <?php endif; ?>
-
-    <?php layout('content'); ?>
-</main>
+        <?php layout('content'); ?>
+    </main>
+</div>
 
 
 <?php layout('footer'); ?>

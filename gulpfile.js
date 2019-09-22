@@ -60,15 +60,15 @@ gulp.task('js', js);
 
 function watch() {
     browserSync.init({
-        proxy: "localhost/GribMarket/",
-        // proxy: "localhost/gipermarket/",
+        // proxy: "localhost/GribMarket/",
+        proxy: "localhost/gipermarket/",
         baseDir: "./",
         open: true,
         notify: false
     });
 
     gulp.watch('src/scss/*.scss', scss);
-    gulp.watch('src/script.js', js);
+    gulp.watch('src/js/script.js', js);
     gulp.watch("*.php").on('change', browserSync.reload);
     // gulp.watch('src/script.js', js);
 }

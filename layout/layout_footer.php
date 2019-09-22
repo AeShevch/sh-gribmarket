@@ -75,15 +75,26 @@
                     Оставьте свои контакты <br>
                     и мы свяжемся с вами
                 </span>
-
+                [contact-form id="2"]
                 <span class="form__agreement">
-                    Нажимая на кнопку «Отправить», вы
-                    <button class="">соглашаетесь на обработку ваших персональных данных</button>
+                    <span>Нажимая на кнопку «Отправить», вы
+                        <a href="javascript:void(0);"
+                           class="js-open-agreement">
+                            соглашаетесь на обработку ваших персональных данных
+                        </a>
+                    </span>
                 </span>
-                <button class="form__submit">
+                <button class="form__submit js-submit-form">
                     Отправить
                 </button>
             </div>
         </div>
     </div>
 </footer>
+<div class="rights">
+    <div class="rights__inner">
+        <span class="rights__text">
+            <?php echo date ( 'Y' ) ; ?> Все права защищены
+        </span>
+    </div>
+</div>

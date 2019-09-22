@@ -59,7 +59,7 @@
                 <div class="cart_form product-card__amount amount">
                     <div class="amount_change amount__inner">
                         <button class="down amount__btn">
-                            -
+                            –
                         </button>
                         <input type="text"
                                aria-label="Количество товара"

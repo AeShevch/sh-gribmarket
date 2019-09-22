@@ -29,7 +29,7 @@
                         <?php echo $shop['city']; ?>
                     </span>
                     <span class="represent-item__tel">
-                        <svg viewBox="0 0 20px 20px">
+                        <svg viewBox="0 0 20 20">
                             <use xlink:href="#icon--tel"></use>
                         </svg>
                         <?php echo $shop['phone']; ?>
@@ -72,7 +72,7 @@
                         <?php echo $shop['city']; ?>
                     </span>
                     <span class="represent-item__tel">
-                        <svg viewBox="0 0 20px 20px">
+                        <svg viewBox="0 0 20 20">
                             <use xlink:href="#icon--tel"></use>
                         </svg>
                         <?php echo $shop['phone']; ?>
