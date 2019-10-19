@@ -56,8 +56,8 @@ body {
     }
 
     aside {
-        width: 250px;
         margin-right: 33px;
+        flex: 1 0 250px;
     }
 
 }
@@ -901,6 +901,7 @@ img {
 }
 
 .left-menu {
+    margin-bottom: 1rem;
     &__title {
         height: 60px;
         display: flex;

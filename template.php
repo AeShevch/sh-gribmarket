@@ -28,11 +28,13 @@ Version: 1.0.0*/
     <?php if ((MG::get('controller') == "controllers_catalog") || (MG::get('controller') == "controllers_product")): ?>
         <aside>
             <?php layout('leftmenu'); ?>
-            <?php
-            mgAddMeta('<link type="text/css" href="' . SCRIPT . 'standard/css/jquery.ui.slider.css" rel="stylesheet"/>');
-            mgAddMeta('<script src="' . SCRIPT . 'standard/js/filter.js"></script>');
-            echo MG::get('catalogfilter');
-            ?>
+            <div class="c-filter">
+                <?php
+                mgAddMeta('<link type="text/css" href="' . SCRIPT . 'standard/css/jquery.ui.slider.css" rel="stylesheet"/>');
+                mgAddMeta('<script src="' . SCRIPT . 'standard/js/filter.js"></script>');
+                echo MG::get('catalogfilter');
+                ?>
+            </div>
         </aside>
 
     <?php endif; ?>
