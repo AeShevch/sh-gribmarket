@@ -3,6 +3,7 @@
         <?php
         foreach ($data as $category): ?>
             <li class="sub-categories__item sub-category">
+<!--      TODO раскоментировать для prod          -->
 <!--                --><?php //if (!empty($category['image_url'])): ?>
 <!--                    <a href="--><?php //echo SITE . '/' . $category['parent_url'] . $category['url']; ?><!--"-->
 <!--                       class="sub-category__img"-->

@@ -43,6 +43,7 @@ body {
     color: $textColor;
     line-height: 1.4;
 }
+
 .l-body__catalog {
     & .main {
         flex-grow: 1;
@@ -53,6 +54,7 @@ body {
             margin-top: 14px;
         }
     }
+
     aside {
         width: 250px;
         margin-right: 33px;
@@ -332,6 +334,7 @@ img {
         color: #fff;
     }
 }
+
 // Карусель товаров
 .products-carousel {
     @include mainContainer;
@@ -360,6 +363,7 @@ img {
         margin-top: 1rem;
         padding: 10px;
     }
+
     .swiper-pagination-bullet {
         width: 15px;
         height: 15px;
@@ -391,6 +395,17 @@ img {
 
     &:hover {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
+    }
+
+    &__wrap {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -20px -20px 0;
+
+        & .product-card {
+            flex: 1 1 280px;
+            margin: 0 20px 20px 0;
+        }
     }
 
     &.swiper-slide {
@@ -546,6 +561,7 @@ img {
 
     &__sale {
         margin-top: 10px;
+
         mark {
             -webkit-appearance: none;
             background: none;
@@ -565,6 +581,7 @@ img {
 
 .represent {
     @include mainContainer;
+
     &__title {
         @include title;
         text-align: center;
@@ -618,7 +635,7 @@ img {
     &__right {
         display: flex;
         flex-direction: column;
-        flex: 1 1 50%  ;
+        flex: 1 1 50%;
     }
 
     &__left {
@@ -687,12 +704,14 @@ img {
         background: $accentColor;
         color: #fff;
     }
+
     &__th,
     &__td {
         text-align: center;
         line-height: 1.2;
         font-weight: 400;
     }
+
     &__th {
         padding: 10px 5px;
         font-size: 20px;
@@ -793,6 +812,7 @@ img {
         max-width: 450px;
         border: 3px solid $accentColor;
     }
+
     &__title {
         @include title;
         text-align: center;
@@ -805,10 +825,12 @@ img {
         display: block;
         margin-bottom: 25px;
     }
+
     .mg-title-form,
     .form-designer-submit {
         display: none;
     }
+
     .mg-form-designer {
         border: 0;
         padding: 0;
@@ -827,17 +849,17 @@ img {
     }
 
     & input {
-        height: 40px!important;
+        height: 40px !important;
         border: 1px solid $accentColor;
-        border-radius: 2px!important;
-        box-shadow: none!important;
-        width: 100%!important;
-        font-style: $fontSizeM!important;
+        border-radius: 2px !important;
+        box-shadow: none !important;
+        width: 100% !important;
+        font-style: $fontSizeM !important;
     }
 
     .mg-title-field-form {
         color: $accentColor;
-        font-size: $fontSizeM!important;
+        font-size: $fontSizeM !important;
         background: #fff;
         position: absolute;
         top: -7px;

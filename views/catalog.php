@@ -28,7 +28,7 @@
      */
     layout("apply_filter", $data['applyFilter']); ?>
 
-    <div class="products-wrapper">
+    <div class="products-wrapper product-card__wrap">
 
         <?php foreach ($data['items'] as $item) {
             $data['item'] = $item; ?>
