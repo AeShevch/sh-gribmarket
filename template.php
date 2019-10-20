@@ -25,7 +25,7 @@ Version: 1.0.0*/
 <?php endif; ?>
 
 <div class="main__wrap">
-    <?php if ((MG::get('controller') == "controllers_catalog") || (MG::get('controller') == "controllers_product")): ?>
+    <?php if (MG::get('controller') == "controllers_catalog"): ?>
         <aside>
             <?php layout('leftmenu'); ?>
             <div class="c-filter">

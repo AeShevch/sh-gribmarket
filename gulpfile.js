@@ -42,6 +42,7 @@ function js() {
     return gulp.src(
         [
             'src/js/script.js',
+            // 'src/js/tab-widget.js',
         ])
         .pipe(plumber())
         .pipe(babel())

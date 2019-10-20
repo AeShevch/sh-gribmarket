@@ -54,81 +54,153 @@
     //НЕ УБИРАТЬ! Выводить метатеги страницы, заданные в панели управления.
     mgSEO($data);
 ?>
-<div class="product-details-block">
-    <?php
-        /**
-         * Возвращает готовую верстку картинок товара
-         * Использует 'layout_images.php' текущего шаблона.
-         */
-        mgGalleryProduct($data); ?>
+<section class="product-details-block product">
+    <div class="product__inner">
+        <div class="product__images">
+            <?php
+            /**
+             * Возвращает готовую верстку картинок товара
+             * Использует 'layout_images.php' текущего шаблона.
+             */
+            mgGalleryProduct($data); ?>
+        </div>
 
-    <div class="product-status">
-        <h1 class="product-title"><?php echo $data['title'] ?></h1>
-
-        <?php
+        <div class="product__info product-main-info">
+            <?php
             if (class_exists('Rating')): ?>
-                <div class="product-rating">
+                <div class="product-rating product__rating">
                     [rating id = "<?php echo($data ['id']) ?>"]
                 </div>
             <?php endif; ?>
 
-        <div class="buy-block">
-            <ul class="product-status-list">
-                <!--если не установлен параметр - старая цена, то не выводим его-->
-                <li <?php echo (!$data['old_price']) ? 'style="display:none"' : 'style="display:block"' ?>>
-                    Старая цена:
-                    <span class="old-price">
-                        <?php echo $data['old_price']." ".$data['currency']; ?>
-                    </span>
-                </li>
-                <li>Цена:
-                    <span class="price">
-                        <?php
-                            echo priceFormat($data['price']) ?><?php echo $data['currency']; ?>
-                    </span>
-                </li>
-                <li>
-                    <?php if ($data['count'] == 'много' || $data['count'] == -1) : ?>
-                        <span class="in-stock">
+            <h1 class="product-main-info__title"
+                aria-label="Название товара">
+                <?php echo $data['title'] ?>
+            </h1>
+
+            <div class="product-main-info__short-descr"
+                 aria-label="Краткое описание товара">
+                <?php echo $data['short_description']; ?>
+            </div>
+
+            <b class="product-main-info__availability"
+                  aria-label="Наличие товара">
+            <?php if ($data['count'] == 'много' || $data['count'] == -1) : ?>
+                <span class="in-stock">
 						&#10004; Есть в наличии
 					</span>
-                    <?php else: ?>
-                        Остаток:
-                        <span class="label-black count"><?php echo $data['count'].' '.$data['category_unit']; ?></span> <?php echo $data['remInfo'] ?>
-                    <?php endif; ?>
-                </li>
-                <li <?php echo (!$data['weight']) ? 'style="display:none"' : 'style="display:block"' ?>>Вес: <span
-                            class="label-black weight"><?php echo $data['weight'] ?></span> кг.
-                </li>
-                <li>Артикул: <span class="label-article code"><?php echo $data['code'] ?></span></li>
-                <?php
-                /* Вставляем дополнительные поля товара
-                из файла layout/layout_op_product_fields.php */
-                layout('op_product_fields', $data); ?>
-            </ul>
+            <?php else: ?>
+                В наличии
+                <span class="label-black count"><?php echo $data['count'].' '.$data['category_unit']; ?></span> <?php echo $data['remInfo'] ?>
+            <?php endif; ?>
+        </b>
 
+            <span class="product-main-info__mark product-main-info__mark_code"
+                  aria-label="Артикул товара">
+                Артикул:
+                <b>
+                    <?php echo $data['code'] ?>
+                </b>
+            </span>
 
-            <div class="wholesales-data">
-                <?php
+            <?php if (!empty($data['weight'])) { ?>
+                <span class="product-main-info__mark product-main-info__mark_weight"
+                      aria-label="Вес товара">
+                    Вес:
+                    <b>
+                        <?php echo $data['weight'] ?> кг.
+                    </b>
+                </span>
+            <?php } ?>
+
+            <?php if (!empty($data['old_price'])) { ?>
+                <span class="product-main-info__price product-main-info__price_old"
+                      aria-label="Старая цена товара">
+                <?php echo $data['old_price']." ".$data['currency']; ?>
+            </span>
+            <?php } ?>
+
+            <b class="product-main-info__price"
+                  aria-label="Цена товара">
+                 <?php echo priceFormat($data['price']).' '.$data['currency']; ?>
+            </b>
+
+            <?php
+            /* Вставляем дополнительные поля товара
+            из файла layout/layout_op_product_fields.php */
+            layout('op_product_fields', $data); ?>
+
+            <div class="buy-block">
+                <div class="wholesales-data">
+                    <?php
                     /**
                      * Выводит оптовые цены из файла /layout/layout_wholesales_info.php
                      */
                     layout('wholesales_info', $data['wholesalesData']); ?>
-            </div>
+                </div>
 
-            <?php
+                <?php
                 /**
                  * Выводит информацию о складах из файла  /layout/layout_storage_info.php
                  */
                 layout('storage_info', $data); ?>
 
-            <?php
+                <?php
                 /**
                  * Выводит форму покупки товара из файла layout_property.
                  * Форма содержит кнопки Купить и Сравнить, варианты товара,
                  * характеристики "Набор для выбора" и "Чекбокс", размерно цветовую сетку, выбор количества товаров
                  */
                 echo $data['propertyForm'] ?>
+            </div>
+        </div>
+    </div>
+
+    <script async src="<?php echo PATH_SITE_TEMPLATE ?>/src/js/tab-widget.js"></script>
+    <div class="tab-widget js-tab-widget">
+
+        <ul class="tab-widget__list">
+            <li class="tab-widget__item">
+                <a href="#tab-panel-1" class="tab-widget__link">Инструкция</a>
+            </li>
+
+            <?php if (!empty($data['stringsProperties'])): ?>
+                <li class="tab-widget__item">
+                    <a href="#tab-panel-2" class="tab-widget__link">Характеристики</a>
+                </li>
+            <?php endif; ?>
+
+            <?php if (class_exists('mgTreelikeComments')): ?>
+                <li class="tab-widget__item">
+                    <a href="#tree-comments" class="tab-widget__link">Отзывы</a>
+                </li>
+            <?php endif; ?>
+        </ul>
+
+        <div class="tab-widget__tabs">
+
+            <div class="tab-widget__tab-content">
+                <h2 id="tab-panel-1" tabindex="-1">Инструкция «<?php echo $data['title'] ?>»</h2>
+                <?php echo $data['description'] ?>
+            </div>
+
+            <?php if (!empty($data['stringsProperties'])): ?>
+                <div class="tab-widget__tab-content">
+                    <h2 id="tab-panel-2" tabindex="-1">Характеристики товара «<?php echo $data['title'] ?>»</h2>
+                    <div id="tab_property"><?php layout('property', $data); ?></div>
+                </div>
+            <?php endif; ?>
+
+            <?php if (class_exists('mgTreelikeComments')): ?>
+                <div class="tab-widget__tab-content"
+                     itemscope
+                     itemtype="http://schema.org/Review">
+                    <h2 id="tree-comments"
+                        tabindex="-1">Отзывы о товаре «<?php echo $data['title'] ?>»</h2>
+                    [mg-treelike-comments type="product"]
+                </div>
+            <?php endif; ?>
+
         </div>
     </div>
 
@@ -184,7 +256,7 @@
          */
         echo $data['related'] ?>
 
-</div>
+</section>
 
  
 

@@ -14,15 +14,20 @@
         echo($data['maxCount'] == "0" || !$data['activity'] ? 'style="display:none"' : '');
     } ?> >
     <?php if (!$data['noneAmount']) { ?>
-        <div class="hidder-element" <?php echo($data['maxCount'] == "0" ? 'style="display:none"' : '') ?> >
-            <p class="qty-text">Количество:</p>
-            <div class="cart_form">
-                <input type="text" name="amount_input" class="amount_input"
-                       data-max-count="<?php echo $data['maxCount'] ?>" value="1"/>
-                <div class="amount_change">
-                    <a href="#" class="up">+</a>
-                    <a href="#" class="down">-</a>
-                </div>
+        <div class="cart_form product-card__amount amount">
+            <div class="amount_change amount__inner">
+                <button class="down amount__btn">
+                    –
+                </button>
+                <input type="text"
+                       aria-label="Количество товара"
+                       class="amount_input amount__input"
+                       name="amount_input"
+                       data-max-count="<?php echo $data['maxCount'] ?>"
+                       value="1"/>
+                <button class="up amount__btn">
+                    +
+                </button>
             </div>
         </div>
     <?php } ?>
@@ -63,14 +68,6 @@
                 ?>
                 <input type="submit" name="buyWithProp">
             <?php } ?>
-            <?php
-            /**
-             * Вставляем кнопку «Добавить к сравнению» из файла layout_btn_compare.php
-             * только если редакция движка Маркет или Гипермаркет
-             */
-            if ((EDITION == "market") || (EDITION == "gipermarket")) {
-                layout('btn_compare', $data);
-            } ?>
         <?php } ?>
 
     </div>

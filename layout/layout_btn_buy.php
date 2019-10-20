@@ -18,7 +18,11 @@
        rel="nofollow"
        class="addToCart product-buy product-card__btn"
        data-item-id="<?php echo $data["id"]; ?>">
+        <?php if(MG::get('controller')=="controllers_product") { ?>
+            Добавить в корзину
+        <?php } else { ?>
         Купить
+    <?php } ?>
     </a>
 
 <?php if (!empty($data['variant_exist'])) : ?>
