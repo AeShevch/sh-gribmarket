@@ -170,16 +170,16 @@
                 </li>
             <?php endif; ?>
 
-            <?php if (class_exists('mgTreelikeComments')): ?>
+            <?php if (class_exists('CommentsToMoguta')): ?>
                 <li class="tab-widget__item">
-                    <a href="#tree-comments" class="tab-widget__link">Отзывы</a>
+                    <a href="#comments-mg" class="tab-widget__link">Отзывы</a>
                 </li>
             <?php endif; ?>
         </ul>
 
         <div class="tab-widget__tabs">
 
-            <div class="tab-widget__tab-content">
+            <div class="tab-widget__tab-content tab-widget__tab-content_description">
                 <h2 id="tab-panel-1" tabindex="-1">Инструкция «<?php echo $data['title'] ?>»</h2>
                 <?php echo $data['description'] ?>
             </div>
@@ -191,65 +191,19 @@
                 </div>
             <?php endif; ?>
 
-            <?php if (class_exists('mgTreelikeComments')): ?>
+            <?php if (class_exists('CommentsToMoguta')): ?>
                 <div class="tab-widget__tab-content"
                      itemscope
                      itemtype="http://schema.org/Review">
-                    <h2 id="tree-comments"
+                    <h2 id="comments-mg"
                         tabindex="-1">Отзывы о товаре «<?php echo $data['title'] ?>»</h2>
-                    [mg-treelike-comments type="product"]
-                </div>
-            <?php endif; ?>
-
-        </div>
-    </div>
-
-    <!--    Вкладки с информацией о товаре -->
-    <div class="prod-tabs">
-        <ul>
-            <li><a href="#tab1">Описание</a></li>
-            <?php if (!empty($data['stringsProperties'])): ?>
-                <li><a href="#tab_property">Характеристики</a></li>
-            <?php endif; ?>
-            <?php if (class_exists('mgTreelikeComments')): ?>
-                <li><a href="#tree-comments">Отзывы</a></li>
-            <?php endif; ?>
-            <?php if (class_exists('CommentsToMoguta')): ?>
-                <li><a href="#comments-mg">Отзывы</a></li>
-            <?php endif; ?>
-            <?php foreach ($data['thisUserFields'] as $key => $value) {
-                if ($value['type'] == 'textarea' && $value['value']) { ?>
-                    <li><a href="#tab<?php echo $key ?>"><?php echo $value['name'] ?></a></li>
-                <?php }
-            } ?>
-        </ul>
-        <!--   Содержимое вкладок     -->
-        <div class="product-tabs-container">
-            <div id="tab1" itemprop="description"><?php echo $data['description'] ?></div>
-            <?php if (!empty($data['stringsProperties'])): ?>
-                <div id="tab_property"><?php layout('property', $data); ?></div>
-            <?php endif; ?>
-            <?php if (class_exists('mgTreelikeComments')): ?>
-                <div id="tree-comments" itemscope itemtype="http://schema.org/Review">
-                    [mg-treelike-comments type="product"]
-                </div>
-            <?php endif; ?>
-
-            <?php if (class_exists('CommentsToMoguta')): ?>
-                <div id="comments-mg" itemscope itemtype="http://schema.org/Review">
                     [comments]
                 </div>
             <?php endif; ?>
 
-            <?php foreach ($data['thisUserFields'] as $key => $value) {
-                if ($value['type'] == 'textarea') { ?>
-                    <div id="tab<?php echo $key ?>"
-                         itemscope><?php echo preg_replace('/\<br(\s*)?\/?\>/i', "\n", $value['value']) ?></div>
-                <?php }
-
-            } ?>
         </div>
     </div>
+
     <?php
         /**
          * Выводит блок "С этим товаром покупают из файла layout_related.php"

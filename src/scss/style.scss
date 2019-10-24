@@ -998,6 +998,7 @@ img {
 
     &__images {
         flex: 1 1 320px;
+        margin-right: 1rem;
     }
 
     &__info {
@@ -1137,6 +1138,17 @@ img {
 
     &__tab-content {
         display: none;
+
+        &_description {
+            font-size: 18px;
+        }
+
+        & h1,
+        & h2,
+        & h3,
+        & h4 {
+            color: $titleColor;
+        }
     }
 
     &__tab-content--active,
