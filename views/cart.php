@@ -9,7 +9,8 @@
  *    $data['meta_title'] => 'Значение meta тега для страницы '
  *    $data['meta_keywords'] => 'Значение meta_keywords тега для страницы '
  *    $data['meta_desc'] => 'Значение meta_desc тега для страницы '
- *    $data['currency'] => 'Текущая валюта магазина'
+ *    $data['currency'] => 'Текущая валюта магазина',
+ *    $data['related'] => 'Товары с которыми покупают данные товары',
  *   </code>
  *
  *   Получить подробную информацию о каждом элементе массива $data, можно вставив следующую строку кода в верстку файла.
@@ -22,99 +23,122 @@
  *    <?php echo $data['productPositions']; ?>
  *   </code>
  *
- *   <b>Внимание!</b> Файл предназначен только для форматированного вывода данных на страницу магазина. Категорически не рекомендуется выполнять в нем запросы к БД сайта или реализовывать сложую программную логику логику.
+ *   <b>Внимание!</b> Файл предназначен только для форматированного вывода данных на страницу магазина. Категорически не рекомендуется выполнять в нем запросы к БД сайта или реализовывать сложную программную логику логику.
  * @author Авдеев Марк <mark-avdeev@mail.ru>
  * @package moguta.cms
  * @subpackage Views
  */
-
 // Установка значений в метатеги title, keywords, description.
 mgSEO($data);
 ?>
-<?php mgTitle('Корзина'); ?>
-<h1 class="new-products-title"><span>Корзина</span> товаров</h1>
 
-<div class="product-cart" style="display:<?php echo !$data['isEmpty'] ? 'none' : 'block'; ?>">
-    <div class="cart-wrapper">
-        <form method="post" action="<?php echo SITE ?>/cart">
-            <table class="cart-table">
-                <tr>
-                    <th>№</th>
-                    <th>Изображение</th>
-                    <th>Наименование</th>
-                    <th>Артикул</th>
-                    <th class="qty-field">Количество</th>
-                    <th>Цена за одну шт.</th>
-                    <th>Общая сумма</th>
-                    <th></th>
-                </tr>
-                <?php $i = 1;
-                foreach ($data['productPositions'] as $product): ?>
-                    <tr>
-                        <td class="index">
-                            <?php echo $i++ ?>
-                        </td>
-                        <td class="img-cell">
-                            <a href="<?php echo $product["link"] ?>" target="_blank" class="cart-img">
-                                <img
-                                    src="<?php echo mgImageProductPath($product["image_url"], $product['id'], 'small') ?>"
-                                    alt="">
-                            </a>
-                        </td>
-                        <td>
-                            <a href="<?php echo $product["link"] ?>" target="_blank">
-                                <?php echo $product['title'] ?>
-                            </a>
-                            <br/><?php echo $product['property_html'] ?>
-                        </td>
-                        <td>
-                            <?php echo $product['code'] ?>
-                        </td>
-                        <td class="count-cell">
-                            <div class="cart_form">
-                                <input type="text" name="item_<?php echo $product['id'] ?>[]" class="amount_input zeroToo" data-max-count="<?php echo $data['maxCount'] ?>" value="<?php echo $product['countInCart'] ?>" />
-                                <div class="amount_change">
-                                    <a href="#" class="up">+</a>
-                                    <a href="#" class="down">-</a>
-                                </div>
-                            </div>
-                            <input type="hidden"  name="property_<?php echo $product['id'] ?>[]" value = "<?php echo $product['property'] ?>"/>
-                            <button type="submit" name="refresh" class="refresh" title="Пересчитать" value="Пересчитать" style="display: none;"></button>
-                        </td>
-                        <td>
-                            <?php echo $product['price'] ?><?php echo $data['currency']; ?>
-                        </td>
-                        <td class="price-cell">
-                            <?php echo($product['countInCart'] * $product['price']) ?><?php echo $data['currency']; ?>
-                        </td>
-                        <td>
-                            <a class="deleteItemFromCart delete-btn" href="<?php echo SITE ?>/cart"
-                               data-delete-item-id="<?php echo $product['id'] ?>"
-                               data-property="<?php echo $product['property'] ?>"
-                               data-variant="<?php echo $product['variantId'] ?>" title="Удалить товар"></a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-                <tr>
-                    <td colspan="6" style="text-align:right;">Стоимость всех товаров:</td>
-                    <td class="total-sum">
-                        <strong><?php echo $data['totalSumm']; ?><?php echo $data['currency']; ?></strong></td>
-                </tr>
-            </table>
-        </form>
-    </div>
-        <?php if (class_exists('PromoCode')): ?>
-            [promo-code]
+<?php mgTitle(lang('cart')); ?>
+
+<div class="l-container">
+    <div class="l-row">
+
+        <div class="l-col min-0--12">
+            <div class="c-title"><?php echo lang('productCart'); ?></div>
+        </div>
+
+        <?php if (class_exists('MinOrder')): ?>
+            <div class="l-col min-0--12">
+                [min-order]
+            </div>
         <?php endif; ?>
 
-        <form action="<?php echo SITE ?>/order" method="post" class="checkout-form">
-            <button type="submit" class="checkout-btn default-btn" name="order" value="Оформить заказ">Оформить заказ
-            </button>
-        </form>
-        <div class="clear">&nbsp;</div>
-        <?php echo $data['related'] ?>
-    </div>
+        <div class="l-col min-0--12">
+            <div class="product-cart" style="display:<?php echo $data['isEmpty'] ? 'block' : 'none'; ?>">
+                <div class="c-form cart-wrapper">
+                    <form class="cart-form" method="post" action="<?php echo SITE ?>/cart">
+                        <div class="c-table">
+                            <table class="cart-table">
+                                <?php $i = 1;
+                                foreach ($data['productPositions'] as $product): ?>
+                                    <tr>
+                                        <td class="c-table__img img-cell">
+                                            <a href="<?php echo $product["link"] ?>" target="_blank" class="cart-img">
+                                                <img src="<?php echo mgImageProductPath($product["image_url"], $product['id'], 'small') ?>"
+                                                     alt="image">
+                                            </a>
+                                        </td>
+                                        <td class="c-table__name name-cell">
+                                            <a class="c-table__link" href="<?php echo $product["link"] ?>"
+                                               target="_blank">
+                                                <?php echo $product['title'] ?>
+                                            </a>
+                                            <br>
+                                            <?php echo $product['property_html'] ?>
+                                        </td>
+                                        <td class="c-table__count count-cell">
+                                            <div class="cart_form">
+                                                <div class="c-amount amount_change">
+                                                    <a href="#" class="c-amount__up up">
+                                                        <svg class="icon icon--arrow-right">
+                                                            <use xlink:href="#icon--arrow-right"></use>
+                                                        </svg>
+                                                    </a>
+                                                    <input type="text" name="item_<?php echo $product['id'] ?>[]"
+                                                           class="amount_input zeroToo"
+                                                           data-max-count="<?php echo $data['maxCount'] ?>"
+                                                           value="<?php echo $product['countInCart'] ?>"/>
+                                                    <a href="#" class="c-amount__down down">
+                                                        <svg class="icon icon--arrow-left">
+                                                            <use xlink:href="#icon--arrow-left"></use>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="property_<?php echo $product['id'] ?>[]"
+                                                   value="<?php echo $product['property'] ?>"/>
+                                        </td>
+                                        <td class="c-table__price price-cell">
+                                            <?php echo MG::numberFormat($product['countInCart'] * $product['price']) ?><?php echo $data['currency']; ?>
+                                        </td>
+                                        <td class="c-table__remove remove-cell">
+                                            <a class="deleteItemFromCart delete-btn" href="<?php echo SITE ?>/cart"
+                                               data-delete-item-id="<?php echo $product['id'] ?>"
+                                               data-property="<?php echo $product['property'] ?>"
+                                               data-variant="<?php echo $product['variantId'] ?>"
+                                               title="<?php echo lang('deleteProduct'); ?>">
+                                                <div class="icon__cart">
+                                                    <svg class="icon icon--remove">
+                                                        <use xlink:href="#icon--remove"></use>
+                                                    </svg>
+                                                </div>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </table>
+                        </div>
+                    </form>
 
-    <div class="empty-cart-block" style="display:<?php echo !$data['isEmpty'] ? 'block' : 'none'; ?>">
-        <img src="<?php echo PATH_TEMPLATE ?>/images/empty-cart.jpg" alt=""/>
+                    <?php if ((class_exists('OikDisountCoupon')) || (class_exists('PromoCode'))): ?>
+                        <div class="c-promo-code">
+                            [promo-code]
+                        </div>
+                    <?php endif; ?>
+
+                    <div class="c-table__footer total-price-block">
+                        <div class="c-table__total">
+                            <span class="title"><?php echo lang('toPayment'); ?>:</span>
+                            <span class="total-sum">
+                           <strong> <?php echo priceFormat($data['totalSumm']) ?>&nbsp;<?php echo $data['currency']; ?></strong>
+                       </span>
+                        </div>
+                        <form action="<?php echo SITE ?>/order" method="post" class="checkout-form">
+                            <button type="submit" class="checkout-btn default-btn success btn" name="order"
+                                    value="<?php echo lang('checkout'); ?>"><?php echo lang('checkout'); ?></button>
+                        </form>
+                    </div>
+                </div>
+                <?php echo $data['related'] ?>
+            </div>
+            <div class="c-alert c-alert--blue empty-cart-block alert-info"
+                 style="display:<?php echo !$data['isEmpty'] ? 'block' : 'none'; ?>">
+                <?php echo lang('cartIsEmpty'); ?>
+            </div>
+        </div>
     </div>
+</div>
